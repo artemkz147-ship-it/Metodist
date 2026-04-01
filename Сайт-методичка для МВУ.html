@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Методичка для МВУ</title>
+    <style>
+        :root {
+            --primary-color: #5c6b73;
+            --secondary-color: #a3c4f3;
+            --accent-color: #ffcbf2;
+            --bg-color: #fcfaf9;
+            --card-bg: #ffffff;
+            --text-color: #4a4e69;
+            --shadow: 0 10px 25px rgba(163, 196, 243, 0.2);
+        }
+        body {
+            font-family: 'Nunito', 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            background-color: #f1f5f9;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        h2 {
+            color: var(--primary-color);
+            background: #f8f9fa;
+            padding: 15px 25px;
+            margin-top: 50px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+        h3 {
+            color: #7b8a96;
+            margin-top: 30px;
+            padding-left: 15px;
+            border-left: 4px solid var(--secondary-color);
+            border-radius: 2px;
+        }
+        a {
+            color: #5ea1e6;
+            text-decoration: none;
+            font-weight: 700;
+            word-break: break-all;
+            transition: all 0.3s ease;
+            background-color: rgba(163, 196, 243, 0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        a:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            box-shadow: 0 4px 8px rgba(163, 196, 243, 0.4);
+        }
+        ul {
+            padding-left: 25px;
+            background: #fdfdfd;
+            border-radius: 15px;
+            padding: 20px 20px 20px 40px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+        }
+        li {
+            margin-bottom: 12px;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 4px 10px;
+            border-radius: 10px;
+        }
+        .credentials {
+            background-color: #fcf5f7;
+            border: none;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.03);
+            color: #8b6b77;
+        }
+        iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            border-radius: 25px;
+            margin: 25px 0;
+            box-shadow: var(--shadow);
+            background-color: #f1f5f9;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            font-size: 1.05em;
+            text-align: center;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        th, td {
+            padding: 18px;
+            border-bottom: 1px solid #edf2f7;
+            background-color: white;
+        }
+        th {
+            background-color: #e0fbfc;
+            color: var(--primary-color);
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+        td:first-child {
+            text-align: left;
+            font-weight: 700;
+            background-color: #f8f9fa;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .grid-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .grid-links div {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 10px;
+        }
+        .grid-links ul {
+            background: transparent;
+            box-shadow: none;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .icon {
+            font-size: 1.2em;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        @media (max-width: 768px) {
+            .grid-links { grid-template-columns: 1fr; }
+            iframe { height: 300px; }
+            .container { padding: 30px 20px; border-radius: 20px; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h1>📚 Сайт-методичка для МВУ</h1>
+
+    <h2>💼 Основная информация о работе</h2>
+    <h3>Памятка 📝 для стажера</h3>
+    <p><span class="icon">📌</span> <b>Оформление 👨‍💻 по смз</b> — компенсируем налог и предоставляем оплачиваемый отпуск (по среднемесячному заработку).</p>
+    <p><span class="icon">📌</span> <b>График 📆</b><br>Работаем 5/2 с 12 до 20 или с 13 до 21. Выходные плавающие.</p>
+    
+    <p><span class="icon">💰</span> <b>Мотивация 📈</b><br>Система мотивации МВУ:</p>
+    <ul>
+        <li><b>Процент с продаж:</b> прогрессивная шкала от 2% до 7% в зависимости от выручки и дней в цикле.</li>
+        <li><b>Бонус за конверсию в продажу (25%+):</b> дополнительные выплаты (например, 12 000 ₽ при цикле 7 дней).</li>
+        <li><b>Бонус за конверсию в подачу (35%+):</b> дополнительные выплаты (например, 4 000 ₽ при цикле 7 дней).</li>
+    </ul>
+    <p><b>Примеры процента с продаж (взято для цикла 7 дней):</b><br>
+    • Процент 3% при выручке от 300 000 ₽<br>
+    • Процент 5% при выручке от 430 000 ₽<br>
+    • Процент 6% при выручке от 570 000 ₽<br>
+    • Процент 7% при выручке от 900 000 ₽</p>
+    
+    <p><b>Итого (в неделю):</b><br>
+    – 900.000 р за неделю = от 63.000 премии + фикс;<br>
+    – 570.000 р в неделю = от 34.200 премии + фикс;<br>
+    – от 430.000 р в неделю = от 21.500 премии + фикс;<br>
+    – от 300.000 р в неделю = от 9.000 премии + фикс.<br>
+    + Твердый фикс 12.000 + мягкий фикс - 320 р за каждую проведенную встречу.</p>
+
+    <p><b>Идеальный таргет для МОП:</b> 3-4 встречи в день, у стажеров — 1-2 встречи в день (руководитель отсматривает первые встречи и выявляет точки роста для вашей успешной работы).</p>
+
+    <p><span class="icon">❕</span> <b>Условия выплат</b> <span class="icon">❕</span><br>
+    Фиксированная часть начисляется с первого дня обучения при условии:</p>
+    <ul>
+        <li>успешное прохождение адаптации (8-10 уроков = 1 ПРОДАЖА)</li>
+        <li>стажировка 5 дней (с первого дня выхода в ОП = работа с лидами, в соответствии с утвержденным и согласованным графиком с вашим руководителем)</li>
+        <li>При не соблюдении одного из вышеуказанных условий стажировки, фиксированная часть (твердая+мягкая) не начисляется.</li>
+        <li>Если стажировка (5 дней) не пройдена, но стажер осуществил одну или более продаж, выплата будет осуществлена в соответствии с мотивацией за продажи в цикл (% от суммы в кассе).</li>
+    </ul>
+    <p>☺️ Желаю успехов и развития!!! Мы ждем тебя в ОП с нетерпением и надеемся на долгое и плодотворное сотрудничество ☺️</p>
+    
+    <p><b>Мотивация:</b> <a href="https://docs.google.com/spreadsheets/d/1TjiL-_gD2I9G9uj0wFBuBbawxFzHSFUdyb3vau_LaKE/edit?gid=802876850#gid=802876850" target="_blank">Ссылка на таблицу</a></p>
+
+    <h2>💰 МИНИМАЛЬНЫЕ ЦЕНЫ</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Формат</th>
+                <th>П40 (год обучения)</th>
+                <th>П80 (2 года обучения)</th>
+                <th>П80+40 (2года с преподом+1 год записи)</th>
+                <th>П120 (3 года с преподавателем)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Рассрочка</td>
+                <td>120.000</td>
+                <td>180.000</td>
+                <td>240.000</td>
+                <td>320.000</td>
+            </tr>
+            <tr>
+                <td>Сплит</td>
+                <td>90.000</td>
+                <td>160.000</td>
+                <td>220.000</td>
+                <td>270.000</td>
+            </tr>
+            <tr>
+                <td>КЭШ</td>
+                <td>80.000</td>
+                <td>140.000</td>
+                <td>170.000</td>
+                <td>250.000</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>📑 Регламенты и База Знаний</h2>
+    <ul>
+        <li>1) <a href="https://docs.google.com/document/d/1VeXfOEwz5c8GW6iOEpqCuzQPEhweRumEMqePCPg9UoI/edit?tab=t.0" target="_blank">Регламент 1</a></li>
+        <li>2) <a href="https://docs.google.com/document/d/1tO2zI17Zc_gQQQNX1_UQhZiZ3c_5-GHCjyLla2otfuw/edit?tab=t.0" target="_blank">Регламент 2</a></li>
+        <li>3) <a href="https://docs.google.com/spreadsheets/d/1DkwDDJloQlWXhijSUxXLVWDQHOOifE-k1pDN2njRxfc/edit?gid=0#gid=0" target="_blank">Контроль качества продажной части</a></li>
+    </ul>
+
+    <h3>Как отправлять сообщения клиенту перед уроком</h3>
+    <iframe src="https://drive.google.com/file/d/1kAkhrW56LjLmyekeYKi2fTx7QpLW0MRz/preview" allow="autoplay"></iframe>
+
+    <h3>Материалы для проведения встречи</h3>
+    <div class="grid-links">
+        <div>
+            <ul>
+                <li><a href="https://docs.google.com/presentation/d/1-myFI59zpqs882Xiwy0-MT4V_FIqYyg2Pty1RDhVCsY/edit?slide=id.g3140131b6c8_0_1416#slide=id.g3140131b6c8_0_1416" target="_blank">Презентация</a></li>
+                <li><a href="https://docs.google.com/document/d/19g-VhaoBL8Dt_FfHcL5vUsoWhgtbC4FV1W8VTQ9ao98/edit?tab=t.eobhpdx7nu2y#heading=h.3tvf1qisb6fm" target="_blank">Памятка по продукту</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/15J5ulWayclzMivC8Dc35jkxQfEoH-s_v03uf5Z0BBLY/edit?gid=1142422512#gid=1142422512" target="_blank">Скрипт встречи</a></li>
+                <li><a href="https://docs.google.com/document/d/1wzyVeajuvFxYCxmeayACD6w6VslllH6BUq6wxzdlmMU/edit?tab=t.0" target="_blank">Установление контакта</a></li>
+            </ul>
+        </div>
+        <div>
+            <ul>
+                <li><a href="https://docs.google.com/presentation/d/1Z-mXv5AzYyXBmQK25RBojJk8LwpCmy6bDRM5BxItLpo/edit?slide=id.g3630de2b4b6_0_432#slide=id.g3630de2b4b6_0_432" target="_blank">Выявление потребности</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/1wmMR9LPDc78fz9qoUCgfr7p8ihLgrWFEzcMRapMAdyQ/edit?gid=926367378#gid=926367378" target="_blank">Точки входа</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/1CHOZzA9-xLdoc0v-wAF_g41d6MdDUNPRhHbkOi6O8dg/edit?gid=97838916#gid=97838916" target="_blank">База вопросов</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <p><b>Примеры уроков обязательны к просмотру:</b></p>
+    <ul>
+        <li>1) <a href="https://navstreche.com/publicvideo/0_5hf8yvz4" target="_blank">Пример 1</a></li>
+        <li>2) <a href="https://navstreche.com/publicvideo/0_d6wi41hm" target="_blank">Пример 2</a></li>
+    </ul>
+
+    <h3>Отработки возражений</h3>
+    <p>Памятка: <a href="https://docs.google.com/spreadsheets/d/1FD3RkihbiQWaLuvj8_c2_eGHuiffbDTewHNGaUAp9Ug/edit?gid=1843223045#gid=1843223045" target="_blank">Ссылка на таблицу</a></p>
+    <iframe src="https://drive.google.com/file/d/1p7gWMrRdsmTEvKX_gKDkGDHkO_aKY5SO/preview" allow="autoplay"></iframe>
+
+    <h2>💻 Практики</h2>
+    <p>Чат с разнообразными практиками (видеообучение): <a href="https://t.me/+QjnS6blq8eM2NWIy" target="_blank">https://t.me/+QjnS6blq8eM2NWIy</a></p>
+    
+    <b>1) Скретч</b>
+    <ul>
+        <li><a href="https://docs.google.com/document/d/1rZMhF8Al443aKdW-Hm8tBcKdJR0p9BVL/edit" target="_blank">Фруктовый ниндзя</a></li>
+        <li><a href="https://docs.google.com/document/u/0/d/1bXMbC_CPcuE5cphnhm4Fj3FWw8sxizECYQdMdIXEdeY/edit" target="_blank">Догонялки 7-9</a></li>
+        <li><a href="https://docs.google.com/document/d/1-4c3XNLYWHo2w8av-AiMMnftpWJ8uddCZc8FYfa4Ers/edit?tab=t.0" target="_blank">Догонялки 10-12 усложненные</a></li>
+        <li><a href="https://docs.google.com/document/d/1m7XTW7n6bgIkWoxJnft4VU78cljHdEXJnGfprLPo2G0/edit?tab=t.0" target="_blank">Догонялки 13+ самые сложные</a></li>
+        <li><a href="https://docs.google.com/document/d/1uM_Tnb1AY01VMHAoZjtM_j4ABhmpPP7IgQ-pRTsEq6I/edit?tab=t.0" target="_blank">Амог ас 13+</a></li>
+    </ul>
+    
+    <b>2) Пайтон</b>
+    <ul>
+        <li><a href="https://docs.google.com/document/d/1tdkafjhIyAYzzYQlfU6BVBqPVCvW_l_WepPPKj2UY8A/edit?tab=t.0" target="_blank">Ссылка на материалы</a></li>
+    </ul>
+
+    <h2>📊 Таблицы, CRM и Чаты</h2>
+    <h3>Как работать с таблицей ТОЧКИ РОСТА</h3>
+    <p><b>Регламент работы:</b></p>
+    <ul>
+        <li>каждый день вносим все подачи в банк в том числе и слеты на заявке</li>
+        <li>расписание заполняем на неделю вперед</li>
+        <li>следим за общими показателями по месяцу и каждому циклу</li>
+    </ul>
+    <p>Продажи любят подсчет, конву и точную цель! НЕТ ЦЕЛИ — НЕТ ДЕНЕГ чтобы получить доступ к таблице, пришли свою почту РОПу</p>
+    <p>Ссылка на таблицу: <a href="https://docs.google.com/spreadsheets/d/1bkhvt4CEG7HSw7hGfhx24dTmxiUsYLVRX3Ej73tMm0E/edit?gid=544428423#gid=544428423" target="_blank">Открыть таблицу</a></p>
+    <iframe src="https://drive.google.com/file/d/1NPk0hAiJZtk1j4BraXFVYZM3nQlLtZkw/preview" allow="autoplay"></iframe>
+
+    <h3>Как работать в командном чате</h3>
+    <iframe src="https://drive.google.com/file/d/12MGWh1qgZkAybVeKuu_iuUBYlmzMsJK7/preview" allow="autoplay"></iframe>
+
+    <h3>БИТРИКС И ЧАТЫ МВУ</h3>
+    <p>Каждый чат отвечает за определенное действие до/после оплаты:</p>
+    <ul>
+        <li><b>Овер</b> — чат где вы получаете уроки, отписываетесь по статусу ведения или тех сложностей</li>
+        <li><b>Продажи + поддержка</b> — чат куда мы передаем клиента после оплаты. Не передал - не получил оплату.</li>
+        <li><b>МВУ - Клоузеры</b> — чат куда передаем клиента если не продали на встрече! Передаем строго день в день!</li>
+        <li><b>ОПЛАТЫ!!! 4 миллиона</b> — общий чат департамента куда ты пишешь свои оплаты и получаешь свою минуту славы! Желаю тебе писать туда каждый день</li>
+    </ul>
+    <iframe src="https://drive.google.com/file/d/1lWYpPlt3l11nwdZP1P7K1JVyh9JWQR9t/preview" allow="autoplay"></iframe>
+
+    <h3>Работа со звонками в яндекс телемост</h3>
+    <iframe src="https://drive.google.com/file/d/1VuatmlMCD7qOSjRzNfmbtpELjqpR2rzJ/preview" allow="autoplay"></iframe>
+
+    <h2>💳 Банки и Оформление Рассрочек</h2>
+    
+    <h3>Как создать ссылку на рассрочку в СберБанк</h3>
+    <p>Ссылка для входа: <a href="https://sbi.sberbank.ru:9443/ic/ufs/login.html?justSignedOut" target="_blank">https://sbi.sberbank.ru:9443/ic/ufs/login.html?justSignedOut</a></p>
+    <div class="credentials">
+        Логин приходит на почту<br>
+        Пароль приходит в смс на телефон<br>
+        Если учетки еще нет , то просим сделать ссылку у коллег
+    </div>
+    <iframe src="https://drive.google.com/file/d/1fPlYJYOpXwPr_IX2NcJAtPEQz0FpzfjQ/preview" allow="autoplay"></iframe>
+
+    <h3>Как сделать ссылку на рассрочку в Т-банк</h3>
+    <p>Переходим по ссылке что ниже и следуем инструкциям с видео: <a href="https://erp.code-class.ru/loan-application/create" target="_blank">https://erp.code-class.ru/loan-application/create</a></p>
+    <iframe src="https://drive.google.com/file/d/1gu6__0FjAWiry37ALaE1ie2AkUtnB6cN/preview" allow="autoplay"></iframe>
+
+    <h3>Как отследить заявку в Т-банк</h3>
+    <p>Ссылка для входа: <a href="https://id.tbank.ru/auth/step?cid=G6ifPwvQHqSL" target="_blank">https://id.tbank.ru/auth/step?cid=G6ifPwvQHqSL</a></p>
+    <p>Номер телефона запросить у РОПа или у коллег</p>
+    <iframe src="https://drive.google.com/file/d/1Gwa3t0lRfa92Szf5iYk58xUaEHa9hAqk/preview" allow="autoplay"></iframe>
+
+    <h3>ОФОРМЛЕНИЕ ОТП</h3>
+    <ul>
+        <li>есть ли паспорт под рукой</li>
+        <li>в процессе оформления, узнать есть ли обязательные платежи и как с кредитной историей</li>
+        <li>проконтролировать доход который указываете в заявке</li>
+        <li>у вас будет всего 3 попытки пройти идентификацию фотографий. Четкие рекомендации как делать фото: никаких бликов/ засветов/ все углы паспорта должны быть видны/ снять очки/ протереть камеру телефона</li>
+        <li>проконтролировать доход который указываете в заявке</li>
+        <li>ПОДПИСАТЬ ВСЕ ЧТО ОДОБРЕНО</li>
+    </ul>
+
+    <h4>Варианты готовых ссылок ОТП:</h4>
+    <ul>
+        <li><a href="https://ecom.otpbank.ru/smart-form?config=25f8cd8c-e928-4433-97e1-33092cf40be4" target="_blank">180к | 24мес.</a></li>
+        <li><a href="https://ecom.otpbank.ru/smart-form?config=f71c2f67-e925-4548-ad54-2c730fb98f33" target="_blank">199к | 24мес.</a></li>
+        <li><a href="https://ecom.otpbank.ru/smart-form?config=904806fd-8a87-40aa-9814-1fb861afc2e3" target="_blank">209к | 24мес.</a></li>
+        <li><a href="https://ecom.otpbank.ru/smart-form?config=0a3b9508-4f5a-4088-b5ab-c5c15c84a696" target="_blank">208к | 24мес.</a></li>
+        <li><a href="https://ecom.otpbank.ru/smart-form?config=fd052541-57e1-46f9-b791-4ab5de64aaf0" target="_blank">219к | 24мес.</a></li>
+        <li><a href="https://ecom.otpbank.ru/smart-form?config=4d1982f3-be78-4b4e-9fed-0c8fcde111c5" target="_blank">215к | 24мес.</a></li>
+        <li><a href="https://ecom.otpbank.ru/smart-form?config=152dfcce-984f-4a1c-8418-cb210bf01ea7" target="_blank">215.000 | 36мес.</a></li>
+        <li><a href="https://ecom.otpbank.ru/smart-form?config=e01ab39f-e497-4970-a9de-f5954104bc74" target="_blank">270.000 | 36мес. (П120 оптим)</a></li>
+        <li><a href="https://ecom.otpbank.ru/smart-form?config=b6a03953-93f3-484e-8be2-1b96c7a71e16" target="_blank">240.000 | 36мес. (п120 оптим)</a></li>
+        <li><a href="https://ecom.otpbank.ru/smart-form?config=aab47c8f-8e08-4123-8ecf-566696118ed5" target="_blank">325.000 | 36мес. (П120 премиум с преподом)</a></li>
+        <li><a href="https://ecom.otpbank.ru/smart-form?config=ef9cd2a1-79de-4e58-a43f-d0f7bbb9e8bd" target="_blank">320.000 | 36мес. (П120 премиум с преподом)</a></li>
+        <li><a href="https://ecom.otpbank.ru/smart-form?config=5ca87aa3-16c1-47d6-8072-9fbb2a16a941" target="_blank">310.000 | 36мес. (П120 премиум с преподом)</a></li>
+    </ul>
+    <iframe src="https://drive.google.com/file/d/1KenwDvnQc3RMEdWL2rXvhkPiQF7NhRzV/preview" allow="autoplay"></iframe>
+
+    <h3>Правила подачи заявок в банк</h3>
+    <p>Первый банк идем на выбор - ОТП/Т-банк (сбер можем пойти только если родитель клиент сбера, у него есть карта и он настаивает). Если получили отказ в первом банке — ведем дальше клиента по каскаду подач! Если получили отказ — спрашиваем клиента в чем может быть причина? (могут быть разные причины - просрочки, банкротство, брали кредитные каникулы, никогда не брали рассрочки, нет гражданства рф, самозапрет). Если у клиента банкротство или самозапрет, но он хочет оформиться, мы все равно ведем его в банк “попробовать” (получаем отказ 99%, зато не роняем себе конву в заявку).</p>
+
+    <h3>Частые ошибки при оформлении</h3>
+    <p>Часто клиенты неправильно пишут ФИО в заявке в банк (тинькофф, отп), нужно проговорить, что правильный порядок очень важен: сначала ФАМИЛИЯ, потом ИМЯ, в конце ОТЧЕСТВО. Клиент указывает низкий доход.</p>
+    <p><b>Рекомендации к доходу:</b></p>
+    <ul>
+        <li>рассрочка на 191.900 - доход от 170 тыс руб</li>
+        <li>рассрочка на 208.000 - доход от 180 тыс руб</li>
+    </ul>
+    <p>Не забудьте напоминать клиенту о отключении страховок и смс-информирования, чтобы месячный платеж не был больше оговоренной суммы.</p>
+    
+    <p><b>Если не приходит код:</b></p>
+    <ol>
+        <li>Вставить сим-карту в другой телефон. Попробовать получить СМС.</li>
+        <li>Перезагрузить телефон.</li>
+        <li>Проверить, есть место в памяти телефона. Если нет — освободить его.</li>
+        <li>Если есть программы, которые работают с СМС, удалить их. Это могут быть приложения, которые фильтруют уведомления.</li>
+        <li>Если две симки в телефоне, посмотреть, активна ли нужная.</li>
+        <li>Обновить программное обеспечение до последней версии.</li>
+        <li>Отключить VPN.</li>
+        <li>Вместо СМС могло прийти пуш-уведомление, проверить пуш-уведомления в мобильном приложении банка.</li>
+        <li>Обратиться в тех. поддержку сотового оператора, чтобы выяснить причины.</li>
+    </ol>
+    <p>Если соблюдать эти простые правила, одобрения не заставят себя ждать! Помните — вы управляете заполнением заявки, а не "как пойдет".</p>
+    <p>Как выглядит оформление у клиента: <a href="https://docs.google.com/spreadsheets/d/1_ZegFmeRPBg7ApFcZIXJCXO7-rCMRIdDbS_BOd--eLA/edit?gid=1622180023#gid=1622180023" target="_blank">Посмотреть пример</a></p>
+
+    <h2>🤝 Закрытие сделки и доступы</h2>
+    
+    <h3>Закрытие сделки с продажей</h3>
+    <iframe src="https://drive.google.com/file/d/1ZsCcy3FSNdPneoqNoicpgVzmkrtotLCf/preview" allow="autoplay"></iframe>
+
+    <h3>Открытие доступа к платформе</h3>
+    <p>Ссылка на ЛК (ссылка для нас, чтобы создавать): <a href="https://erp.kvantastica.ru/admin/login" target="_blank">https://erp.kvantastica.ru/admin/login</a></p>
+    <div class="credentials">
+        Логин и пароль НЕ для клиента<br>
+        Логин: <b>89445552377</b><br>
+        Пароль: <b>1r6EEK8O</b>
+    </div>
+    <p>Инструкция: <a href="https://docs.google.com/document/d/1XgiHa7urObKZuHuN0vjls7UQc4rqP3eFnXtXy-moy4o/edit?tab=t.0#heading=h.l0slcnsmylsf" target="_blank">Прочитать инструкция</a></p>
+
+    <h3>Внесение в реестр оплат</h3>
+    <p>По ссылке: <a href="https://docs.google.com/forms/d/154vfb8eaeWN60Lob2vCAlfRD6DI7HHJIMwojEp9Inck/edit" target="_blank">Перейти к форме</a></p>
+    <p><b>Регламент:</b></p>
+    <ul>
+        <li><b>Менеджер ВУ / Клоузер (ФИО):</b> ищем себя (“МВУ СТАЖЕР” МЫ НИКОГДА НЕ ВЫБИРАЕМ! иначе оплаты не будет на твоём имени)</li>
+        <li><b>Дата оплаты (вводного урока):</b> дата проведения урока</li>
+        <li><b>ФИО ученика:</b> фио ребенка</li>
+        <li><b>Дата рождения ученика:</b> дата рождения ребенка</li>
+        <li><b>Возраст ученика (только цифра):</b> возраст ребенка</li>
+        <li><b>№ класса ученика:</b> какой класс в школе?</li>
+        <li><b>Город проживания:</b> ребенка</li>
+        <li><b>Разница с московским временем:</b> формат: 0/+3/-1</li>
+        <li><b>ФИО родителя:</b> который оплачивал (для отдела поддержки)</li>
+        <li><b>ФИО клиента полностью:</b> кто оплачивал</li>
+        <li><b>E-mail клиента:</b> кто оплачивал</li>
+        <li><b>№ телефона клиента:</b> кто оплачивал, 11 цифр, начиная с "8", без скобок и дефисов</li>
+        <li><b>Курс:</b> тариф который выбрали ребенку</li>
+        <li><b>Пакет оплаченных занятий с преподавателем:</b> указываем именно групповые занятия, для самостоятельного прохождения не добавляем. Если это тариф где 3 года обучения (1 год СР), то указываем всё равно п80! Если это индив, где 3 года с преподом 1 на 1, то указываем п120!. Если это тариф где всего 2 года с преподом, то указываем п80! Если это тариф на год обучения, где 40 занятий, то указываем п40!</li>
+        <li><b>Способ оплаты:</b> где по итогу оформлена рассрочка была? (ЕСЛИ ВАНТА, ТО ВЫБИРАЕМ PosCredit)</li>
+        <li><b>Номер заказа в случае рассрочки Сбера:</b> в банке можно посмотреть в заявке, либо попросить скинуть скрин из банка того, кто делал тебе заявку, и увидишь там номер заказа.</li>
+        <li><b>Срок рассрочки, мес.:</b> не срок обучения, а срок рассрочки! (в случае единовременной оплаты "0")</li>
+        <li><b>Стоимость оплаченного пакета занятий:</b> полная стоимость по абонементу (полная сумма которую подавали в банк)</li>
+        <li><b>Сумма, поступившая на счёт:</b> указываем с копейками. Здесь нельзя ставить ни точки ни запятые. Сумму указываем итоговую после вычета % банком, эта сумма виднеется в заявке в самом банке, это сумма которую школа получается себе после скидки на сумму процентов.</li>
+        <li><b>Комментарий:</b> например надо индивидуальный договор, или клиент будет оплачивать мат капом и т д. Это коммент от себя</li>
+        <li><b>Вид занятий:</b> группа или индив</li>
+        <li><b>Ссылка на клиента в Bitrix24:</b> ссылка, которую отправлял клоузеру в овере на этот урок, или можно открыть его в бите и там скопировать. ссылка прямо на урок.</li>
+        <li><b>Лидоруб:</b> сотрудник или КЦ ОКТЕЛЛ или КЦ KNOWHOW: фио лидоруба который указан в самом уроке</li>
+        <li><b>Номер группы МВУ/клоузер/пилот:</b> Слезко Анастасия</li>
+        <li><b>Регион/не регион:</b> МСК или нет</li>
+        <li><b>Подарок клиенту/особые условия!:</b> всё что озвучивали клиенту или что было в этом тарифе - выбираем тут, В ТОМ ЧИСЛЕ, 40 СР ОБЯЗАТЕЛЬНО ТУТ ВЫБИРАЕМ если был тариф 3 года с преподом в группе. В п40 только фриланс!!!</li>
+        <li><b>Клиент вошел в Личный кабинет?:</b> да/нет</li>
+        <li><b>Продал сам или с помощью МВУ? (только для клоузеров):</b> ничего не выбираем</li>
+        <li><b>Ответственный МВУ (обязательно для клоузеров):</b> ничего не выбираем</li>
+    </ul>
+
+    <h3>Закрытие сделки без продажи</h3>
+    <iframe src="https://drive.google.com/file/d/1pbDyahBjd5PVD_oBfJCbhKGkFHqEmn6v/preview" allow="autoplay"></iframe>
+
+    <h3>Работа с ботом для записи урока</h3>
+    <iframe src="https://drive.google.com/file/d/1DGzawRadZ1hDE_sp5nm8aH6YoQQV6G-I/preview" allow="autoplay"></iframe>
+
+    <h3>Шаблон обязательного комментария к лиду в Битриксе после урока</h3>
+    <div class="credentials" style="background-color: #fdf6e3; border-color: #faebcc; color: #8a6d3b;">
+        <b>Шаблон закрытия непродажного урока:</b><br><br>
+        Имя родителя который присутствовал на уроке: <br>
+        Имя ребенка который присутствовал на уроке: <br>
+        Реакция ребенка на урок: <br>
+        Реакция родителя на урок: <br>
+        Формат обучения группа/индив: <br>
+        Минимальная предложенная стоимость: <br>
+        Peaкция на стоимость: <br>
+        Реакция на рассрочку: <br>
+        Пожелания клиента на способ опл. и цену: <br>
+        Оффер: <br>
+        Почему не произошла оплата: <br>
+        Направление:
+    </div>
+
+    <p><b>Договор оферты:</b> <a href="https://kvantastica.ru/oferta" target="_blank">https://kvantastica.ru/oferta</a></p>
+
+</div>
+
+</body>
+</html>
