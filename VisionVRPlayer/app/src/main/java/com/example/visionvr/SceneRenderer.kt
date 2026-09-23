@@ -223,7 +223,7 @@ class SceneRenderer(
     }.coerceIn(0.45f, 3.2f)
 
     fun release() {
-        player.clearVideoSurface(surface)
+        surface?.let { player.clearVideoSurface(it) }
         surface?.release()
         surface = null
         surfaceTexture?.release()
