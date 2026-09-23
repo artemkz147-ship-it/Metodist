@@ -2,7 +2,7 @@ package com.example.visionvr
 
 import android.graphics.SurfaceTexture
 import android.opengl.GLES11Ext
-import android.opengl.GLES30
+import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
 import android.os.Handler
@@ -19,7 +19,8 @@ class SceneRenderer(
     private val mode: VrMode,
     private val projectionType: VideoProjection,
     private val packing: StereoPacking,
-    private val onSurfaceReady: () -> Unit
+    private val onSurfaceReady: () -> Unit,
+    private val onRendererError: (String) -> Unit
 ) : GLSurfaceView.Renderer {
 
     private var videoTexture = 0
@@ -46,14 +47,20 @@ class SceneRenderer(
     private val mvp = FloatArray(16)
     private val combinedView = FloatArray(16)
     @Volatile private var sourceAspect = 16f / 9f
+    @Volatile private var rendererFailed = false
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        GLES30.glEnable(GLES30.GL_DEPTH_TEST)
-        GLES30.glEnable(GLES30.GL_CULL_FACE)
-        GLES30.glCullFace(GLES30.GL_BACK)
+        try {
+        GLES20.glEnable(GLES20.GL_DEPTH_TEST)
+        GLES20.glEnable(GLES20.GL_CULL_FACE)
+        GLES20.glCullFace(GLES20.GL_BACK)
 
         videoProgram = GlUtil.linkProgram(VERTEX_SHADER, VIDEO_FRAGMENT_SHADER)
         solidProgram = GlUtil.linkProgram(SOLID_VERTEX_SHADER, SOLID_FRAGMENT_SHADER)
+        if (videoProgram == 0 || solidProgram == 0) {
+            failRenderer("Телефон не смог создать VR-шейдер OpenGL ES 2.0")
+            return
+        }
 
         screen = Mesh.flatScreen()
         curved = Mesh.curvedScreen()
@@ -61,6 +68,10 @@ class SceneRenderer(
         hemi = Mesh.hemisphere180()
 
         videoTexture = GlUtil.createExternalTexture()
+        if (videoTexture == 0) {
+            failRenderer("Телефон не смог создать видеотекстуру OpenGL")
+            return
+        }
         surfaceTexture = SurfaceTexture(videoTexture).apply {
             setOnFrameAvailableListener { frameAvailable.set(true) }
         }
@@ -70,6 +81,16 @@ class SceneRenderer(
             if (createdSurface != null) player.setVideoSurface(createdSurface)
             onSurfaceReady()
         }
+        } catch (t: Throwable) {
+            failRenderer(t.message ?: t.javaClass.simpleName)
+        }
+    }
+
+    private fun failRenderer(message: String) {
+        rendererFailed = true
+        Handler(Looper.getMainLooper()).post {
+            onRendererError(message)
+        }
     }
 
     override fun onSurfaceChanged(gl: GL10?, w: Int, h: Int) {
@@ -78,6 +99,11 @@ class SceneRenderer(
     }
 
     override fun onDrawFrame(gl: GL10?) {
+        if (rendererFailed) {
+            GLES20.glClearColor(0f, 0f, 0f, 1f)
+            GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
+            return
+        }
         if (frameAvailable.compareAndSet(true, false)) {
             surfaceTexture?.updateTexImage()
             surfaceTexture?.getTransformMatrix(textureMatrix)
@@ -88,8 +114,8 @@ class SceneRenderer(
             VrMode.CINEMA -> floatArrayOf(0.008f, 0.008f, 0.012f, 1f)
             VrMode.IMMERSIVE -> floatArrayOf(0f, 0f, 0f, 1f)
         }
-        GLES30.glClearColor(clear[0], clear[1], clear[2], clear[3])
-        GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT or GLES30.GL_DEPTH_BUFFER_BIT)
+        GLES20.glClearColor(clear[0], clear[1], clear[2], clear[3])
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         headTracker.viewRotation(headView)
         val halfW = width / 2
@@ -101,7 +127,7 @@ class SceneRenderer(
     }
 
     private fun drawEye(x: Int, y: Int, w: Int, rightEye: Boolean) {
-        GLES30.glViewport(x, y, w, height)
+        GLES20.glViewport(x, y, w, height)
 
         Matrix.setIdentityM(eyeView, 0)
         val isPanorama = mode == VrMode.IMMERSIVE && projectionType != VideoProjection.FLAT
@@ -148,29 +174,29 @@ class SceneRenderer(
     }
 
     private fun drawVideoMesh(mesh: Mesh, rightEye: Boolean) {
-        GLES30.glUseProgram(videoProgram)
-        val pos = GLES30.glGetAttribLocation(videoProgram, "aPosition")
-        val uv = GLES30.glGetAttribLocation(videoProgram, "aUv")
-        val mvpLoc = GLES30.glGetUniformLocation(videoProgram, "uMvp")
-        val texMatrixLoc = GLES30.glGetUniformLocation(videoProgram, "uTexMatrix")
-        val layoutLoc = GLES30.glGetUniformLocation(videoProgram, "uLayout")
-        val eyeLoc = GLES30.glGetUniformLocation(videoProgram, "uEye")
+        GLES20.glUseProgram(videoProgram)
+        val pos = GLES20.glGetAttribLocation(videoProgram, "aPosition")
+        val uv = GLES20.glGetAttribLocation(videoProgram, "aUv")
+        val mvpLoc = GLES20.glGetUniformLocation(videoProgram, "uMvp")
+        val texMatrixLoc = GLES20.glGetUniformLocation(videoProgram, "uTexMatrix")
+        val layoutLoc = GLES20.glGetUniformLocation(videoProgram, "uLayout")
+        val eyeLoc = GLES20.glGetUniformLocation(videoProgram, "uEye")
 
         Matrix.multiplyMM(mv, 0, eyeView, 0, model, 0)
         Matrix.multiplyMM(mvp, 0, projection, 0, mv, 0)
 
-        GLES30.glUniformMatrix4fv(mvpLoc, 1, false, mvp, 0)
-        GLES30.glUniformMatrix4fv(texMatrixLoc, 1, false, textureMatrix, 0)
-        GLES30.glUniform1i(layoutLoc, when (packing) {
+        GLES20.glUniformMatrix4fv(mvpLoc, 1, false, mvp, 0)
+        GLES20.glUniformMatrix4fv(texMatrixLoc, 1, false, textureMatrix, 0)
+        GLES20.glUniform1i(layoutLoc, when (packing) {
             StereoPacking.SIDE_BY_SIDE -> 1
             StereoPacking.TOP_BOTTOM -> 2
             StereoPacking.MONO -> 0
         })
-        GLES30.glUniform1i(eyeLoc, if (rightEye) 1 else 0)
+        GLES20.glUniform1i(eyeLoc, if (rightEye) 1 else 0)
 
-        GLES30.glActiveTexture(GLES30.GL_TEXTURE0)
-        GLES30.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, videoTexture)
-        GLES30.glUniform1i(GLES30.glGetUniformLocation(videoProgram, "uVideo"), 0)
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
+        GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, videoTexture)
+        GLES20.glUniform1i(GLES20.glGetUniformLocation(videoProgram, "uVideo"), 0)
         mesh.draw(pos, uv)
     }
 
@@ -202,13 +228,13 @@ class SceneRenderer(
     }
 
     private fun drawSolid(mesh: Mesh, r: Float, g: Float, b: Float) {
-        GLES30.glUseProgram(solidProgram)
-        val pos = GLES30.glGetAttribLocation(solidProgram, "aPosition")
-        val uv = GLES30.glGetAttribLocation(solidProgram, "aUv")
+        GLES20.glUseProgram(solidProgram)
+        val pos = GLES20.glGetAttribLocation(solidProgram, "aPosition")
+        val uv = GLES20.glGetAttribLocation(solidProgram, "aUv")
         Matrix.multiplyMM(mv, 0, eyeView, 0, model, 0)
         Matrix.multiplyMM(mvp, 0, projection, 0, mv, 0)
-        GLES30.glUniformMatrix4fv(GLES30.glGetUniformLocation(solidProgram, "uMvp"), 1, false, mvp, 0)
-        GLES30.glUniform3f(GLES30.glGetUniformLocation(solidProgram, "uColor"), r, g, b)
+        GLES20.glUniformMatrix4fv(GLES20.glGetUniformLocation(solidProgram, "uMvp"), 1, false, mvp, 0)
+        GLES20.glUniform3f(GLES20.glGetUniformLocation(solidProgram, "uColor"), r, g, b)
         mesh.draw(pos, uv)
     }
 
@@ -270,22 +296,19 @@ class SceneRenderer(
         """
 
         private const val SOLID_VERTEX_SHADER = """
-            #version 300 es
             uniform mat4 uMvp;
-            in vec3 aPosition;
-            in vec2 aUv;
+            attribute vec3 aPosition;
+            attribute vec2 aUv;
             void main() {
                 gl_Position = uMvp * vec4(aPosition, 1.0);
             }
         """
 
         private const val SOLID_FRAGMENT_SHADER = """
-            #version 300 es
             precision mediump float;
             uniform vec3 uColor;
-            out vec4 fragColor;
             void main() {
-                fragColor = vec4(uColor, 1.0);
+                gl_FragColor = vec4(uColor, 1.0);
             }
         """
     }
