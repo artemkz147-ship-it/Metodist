@@ -1,6 +1,6 @@
 package com.example.visionvr
 
-import android.opengl.GLES30
+import android.opengl.GLES20
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -19,14 +19,14 @@ class Mesh private constructor(
 
     fun draw(positionLoc: Int, uvLoc: Int) {
         vertexBuffer.position(0)
-        GLES30.glEnableVertexAttribArray(positionLoc)
-        GLES30.glVertexAttribPointer(positionLoc, 3, GLES30.GL_FLOAT, false, STRIDE, vertexBuffer)
+        GLES20.glEnableVertexAttribArray(positionLoc)
+        GLES20.glVertexAttribPointer(positionLoc, 3, GLES20.GL_FLOAT, false, STRIDE, vertexBuffer)
         vertexBuffer.position(3)
-        GLES30.glEnableVertexAttribArray(uvLoc)
-        GLES30.glVertexAttribPointer(uvLoc, 2, GLES30.GL_FLOAT, false, STRIDE, vertexBuffer)
-        GLES30.glDrawElements(GLES30.GL_TRIANGLES, indexCount, GLES30.GL_UNSIGNED_SHORT, indexBuffer)
-        GLES30.glDisableVertexAttribArray(positionLoc)
-        GLES30.glDisableVertexAttribArray(uvLoc)
+        GLES20.glEnableVertexAttribArray(uvLoc)
+        GLES20.glVertexAttribPointer(uvLoc, 2, GLES20.GL_FLOAT, false, STRIDE, vertexBuffer)
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, indexCount, GLES20.GL_UNSIGNED_SHORT, indexBuffer)
+        GLES20.glDisableVertexAttribArray(positionLoc)
+        GLES20.glDisableVertexAttribArray(uvLoc)
     }
 
     companion object {
