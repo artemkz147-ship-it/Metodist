@@ -26,7 +26,7 @@ class SceneRenderer(
     private var surfaceTexture: SurfaceTexture? = null
     private var surface: Surface? = null
     private val frameAvailable = AtomicBoolean(false)
-    private val textureMatrix = FloatArray(16)
+    private val textureMatrix = FloatArray(16).also { Matrix.setIdentityM(it, 0) }
 
     private var videoProgram = 0
     private var solidProgram = 0
@@ -234,11 +234,10 @@ class SceneRenderer(
         private const val IPD_METERS = 0.064f
 
         private const val VERTEX_SHADER = """
-            #version 300 es
             uniform mat4 uMvp;
-            in vec3 aPosition;
-            in vec2 aUv;
-            out vec2 vUv;
+            attribute vec3 aPosition;
+            attribute vec2 aUv;
+            varying vec2 vUv;
             void main() {
                 gl_Position = uMvp * vec4(aPosition, 1.0);
                 vUv = aUv;
@@ -246,15 +245,13 @@ class SceneRenderer(
         """
 
         private const val VIDEO_FRAGMENT_SHADER = """
-            #version 300 es
-            #extension GL_OES_EGL_image_external_essl3 : require
+            #extension GL_OES_EGL_image_external : require
             precision mediump float;
             uniform samplerExternalOES uVideo;
             uniform mat4 uTexMatrix;
             uniform int uLayout;
             uniform int uEye;
-            in vec2 vUv;
-            out vec4 fragColor;
+            varying vec2 vUv;
 
             vec2 applyStereoLayout(vec2 uv) {
                 if (uLayout == 1) {
@@ -268,7 +265,7 @@ class SceneRenderer(
             void main() {
                 vec2 uv = applyStereoLayout(vUv);
                 vec4 tx = uTexMatrix * vec4(uv, 0.0, 1.0);
-                fragColor = texture(uVideo, tx.xy);
+                gl_FragColor = texture2D(uVideo, tx.xy);
             }
         """
 
