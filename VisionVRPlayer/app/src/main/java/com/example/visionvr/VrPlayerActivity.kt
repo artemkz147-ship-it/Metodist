@@ -123,7 +123,6 @@ class VrGlSurfaceView(context: android.content.Context) : android.opengl.GLSurfa
     init {
         setEGLContextClientVersion(3)
         preserveEGLContextOnPause = true
-        renderMode = RENDERMODE_CONTINUOUSLY
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
