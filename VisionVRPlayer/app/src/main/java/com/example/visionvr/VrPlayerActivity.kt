@@ -40,9 +40,19 @@ class VrPlayerActivity : Activity() {
         headTracker = HeadTracker(this)
 
         glView = VrGlSurfaceView(this)
-        renderer = SceneRenderer(player, headTracker, mode, projection, packing) {
-            runOnUiThread { player.playWhenReady = true }
-        }
+        renderer = SceneRenderer(
+            player = player,
+            headTracker = headTracker,
+            mode = mode,
+            projectionType = projection,
+            packing = packing,
+            onSurfaceReady = {
+                runOnUiThread { player.playWhenReady = true }
+            },
+            onRendererError = { message ->
+                runOnUiThread { showRendererError(message) }
+            }
+        )
         player.addListener(object : Player.Listener {
             override fun onVideoSizeChanged(videoSize: VideoSize) {
                 renderer.setVideoAspect(videoSize.width, videoSize.height)
@@ -79,15 +89,15 @@ class VrPlayerActivity : Activity() {
     override fun onResume() {
         super.onResume()
         hideSystemUi()
-        headTracker.start()
-        glView.onResume()
-        player.play()
+        if (::headTracker.isInitialized) headTracker.start()
+        if (::glView.isInitialized) glView.onResume()
+        if (::player.isInitialized) player.play()
     }
 
     override fun onPause() {
-        player.pause()
-        glView.onPause()
-        headTracker.stop()
+        if (::player.isInitialized) player.pause()
+        if (::glView.isInitialized) glView.onPause()
+        if (::headTracker.isInitialized) headTracker.stop()
         super.onPause()
     }
 
@@ -95,6 +105,18 @@ class VrPlayerActivity : Activity() {
         if (::renderer.isInitialized) renderer.release()
         if (::player.isInitialized) player.release()
         super.onDestroy()
+    }
+
+    private fun showRendererError(message: String) {
+        val root = findViewById<FrameLayout>(android.R.id.content)
+        root.addView(TextView(this).apply {
+            text = "VR-режим не запустился\n\n$message\n\nНажмите Назад. Приложение не будет закрыто."
+            setTextColor(0xFFFFFFFF.toInt())
+            setBackgroundColor(0xEE000000.toInt())
+            textSize = 16f
+            gravity = Gravity.CENTER
+            setPadding(32, 32, 32, 32)
+        }, FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT))
     }
 
     private fun showPlaybackError(error: PlaybackException) {
@@ -141,7 +163,7 @@ class VrGlSurfaceView(context: android.content.Context) : android.opengl.GLSurfa
     private var hadMultiTouch = false
 
     init {
-        setEGLContextClientVersion(3)
+        setEGLContextClientVersion(2)
         preserveEGLContextOnPause = true
     }
 
