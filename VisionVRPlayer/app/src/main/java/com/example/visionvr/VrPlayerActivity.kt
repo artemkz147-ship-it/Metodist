@@ -12,6 +12,7 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.media3.common.MediaItem
+import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.VideoSize
 import androidx.media3.exoplayer.ExoPlayer
@@ -45,6 +46,12 @@ class VrPlayerActivity : Activity() {
         player.addListener(object : Player.Listener {
             override fun onVideoSizeChanged(videoSize: VideoSize) {
                 renderer.setVideoAspect(videoSize.width, videoSize.height)
+            }
+
+            override fun onPlayerError(error: PlaybackException) {
+                runOnUiThread {
+                    showPlaybackError(error)
+                }
             }
         })
         glView.setRenderer(renderer)
@@ -85,9 +92,22 @@ class VrPlayerActivity : Activity() {
     }
 
     override fun onDestroy() {
-        renderer.release()
-        player.release()
+        if (::renderer.isInitialized) renderer.release()
+        if (::player.isInitialized) player.release()
         super.onDestroy()
+    }
+
+    private fun showPlaybackError(error: PlaybackException) {
+        val root = findViewById<FrameLayout>(android.R.id.content)
+        if (root.childCount > 1) return
+        root.addView(TextView(this).apply {
+            text = "Не удалось открыть видео\n\n${error.errorCodeName}\n${error.message ?: "Неизвестная ошибка"}\n\nНажмите Назад и выберите другой файл."
+            setTextColor(0xFFFFFFFF.toInt())
+            setBackgroundColor(0xDD000000.toInt())
+            textSize = 16f
+            gravity = Gravity.CENTER
+            setPadding(32, 32, 32, 32)
+        }, FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT))
     }
 
     private fun hideSystemUi() {
