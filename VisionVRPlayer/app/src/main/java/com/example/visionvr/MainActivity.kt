@@ -153,9 +153,15 @@ class MainActivity : Activity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode != REQ_VIDEO || resultCode != RESULT_OK) return
         val uri: Uri = data?.data ?: return
-        try {
-            contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        } catch (_: SecurityException) {
+        val takeFlags = (data.flags and
+            (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION))
+        if (takeFlags and Intent.FLAG_GRANT_READ_URI_PERMISSION != 0) {
+            try {
+                contentResolver.takePersistableUriPermission(uri, takeFlags)
+            } catch (_: RuntimeException) {
+                // Some document providers grant temporary read access but do not
+                // support persistable grants. The temporary grant is enough here.
+            }
         }
 
         launchVr(uri)
