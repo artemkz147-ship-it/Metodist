@@ -5,10 +5,15 @@
     <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="false" />
 
     <application
+        android:name=".CrashReporterApp"
         android:allowBackup="true"
         android:label="Vision VR Player"
         android:supportsRtl="true"
         android:theme="@style/Theme.VisionVR">
+
+        <activity
+            android:name=".PreviewActivity"
+            android:exported="false" />
 
         <activity
             android:name=".VrPlayerActivity"
