@@ -15,6 +15,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.VideoSize
+import androidx.media3.exoplayer.DefaultRenderersFactory
 import androidx.media3.exoplayer.ExoPlayer
 
 class VrPlayerActivity : Activity() {
@@ -33,9 +34,11 @@ class VrPlayerActivity : Activity() {
         val projection = VideoProjection.valueOf(intent.getStringExtra(EXTRA_PROJECTION) ?: VideoProjection.FLAT.name)
         val packing = StereoPacking.valueOf(intent.getStringExtra(EXTRA_PACKING) ?: StereoPacking.MONO.name)
 
-        player = ExoPlayer.Builder(this).build().apply {
+        val renderersFactory = DefaultRenderersFactory(this)
+            .setEnableDecoderFallback(true)
+
+        player = ExoPlayer.Builder(this, renderersFactory).build().apply {
             setMediaItem(MediaItem.fromUri(uri))
-            prepare()
         }
         headTracker = HeadTracker(this)
 
@@ -47,7 +50,12 @@ class VrPlayerActivity : Activity() {
             projectionType = projection,
             packing = packing,
             onSurfaceReady = {
-                runOnUiThread { player.playWhenReady = true }
+                runOnUiThread {
+                    if (player.playbackState == Player.STATE_IDLE) {
+                        player.prepare()
+                    }
+                    player.playWhenReady = true
+                }
             },
             onRendererError = { message ->
                 runOnUiThread { showRendererError(message) }
