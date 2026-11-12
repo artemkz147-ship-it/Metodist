@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#070912">
+  <title>Python WOW Lab — практики на 15 минут</title>
+  <meta name="description" content="18 коротких практик на настоящем Python: точные инструкции, выбор параметров и живой результат.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="python-only">
+  <div class="noise"></div>
+  <header class="py-topbar">
+    <div class="py-brand"><span>Py</span><div><b>PYTHON WOW LAB</b><small>18 практик · по 15 минут</small></div></div>
+    <div class="py-runtime"><i id="runtimeDot"></i><span id="runtimeLabel">Python загрузится при первом запуске</span></div>
+    <div class="py-top-actions"><button class="ghost guide-button" id="pythonGuide">? Как заниматься</button><button class="ghost" id="pythonDocs">Справочник</button><button class="ghost" id="exportPython">↓ Скачать .py</button><button class="run-button mint-run" id="runPython">▶ Запустить</button></div>
+  </header>
+  <main class="py-app">
+    <section class="py-intro">
+      <div><span class="mode-label mint-text">ПРАКТИКА НА 15 МИНУТ · НАСТОЯЩИЙ PYTHON</span><h1>Выбери проект.<br><em>Собери свою версию.</em></h1></div>
+      <p>Каждая практика — готовый мини-проект: набирай точные строки по шагам, запускай результат и выбирай собственные цвета, размеры, скорость, данные и правила.</p>
+      <div class="intro-stats"><b>15<span>строк</span></b><b>18<span>практик</span></b><b>15<span>минут</span></b></div>
+    </section>
+    <section class="py-workspace">
+      <aside class="mission-panel panel">
+        <div class="panel-title"><span>01</span> ВЫБЕРИ ПРАКТИКУ</div>
+        <div class="mission-filters" id="missionFilters"><button class="active" data-filter="all">Все</button><button data-filter="visual">Визуал</button><button data-filter="games">Игры</button><button data-filter="useful">Полезное</button><button data-filter="data">Данные / AI</button></div>
+        <div class="difficulty-tabs" id="difficultyFilters"><button class="active" data-level="all">Любой уровень</button><button data-level="easy">Просто</button><button data-level="medium">Средне</button><button data-level="hard">Сложно</button></div>
+        <div id="missionList" class="mission-list"></div>
+      </aside>
+      <section class="coding-column">
+        <div class="lesson-guide panel">
+          <div class="guide-title"><span>15</span><div><b>ОДНА ПРАКТИКА · ОДИН РЕЗУЛЬТАТ</b><small>Код не подставляется — ребёнок набирает его сам</small></div></div>
+          <div class="guide-steps"><span><i>3</i> мин · основа</span><span><i>5</i> мин · код</span><span><i>4</i> мин · свой выбор</span><span><i>3</i> мин · запуск</span></div>
+          <p>Слева выбери любой проект. Ниже появятся точные строки, простые объяснения и варианты своей версии.</p>
+        </div>
+        <div class="mission-brief panel" id="missionBrief"><div class="brief-empty"><span>←</span><div><b>Выбери практику слева</b><small>Получишь точные строки, объяснение каждой части и варианты своей версии.</small></div></div></div>
+        <div class="python-editor panel pro-editor">
+          <div class="editor-bar"><span><i></i> main.py</span><div><span id="pythonLineCount">0 / 15 строк</span><b>Python 3</b></div></div>
+          <div class="empty-code-hint" id="emptyCodeHint"><strong>Файл пуст — так и должно быть.</strong><span>Набирай строки из инструкции своими руками.</span><code>Начни со строки 1</code></div>
+          <div class="code-wrap"><pre id="lineNumbers">1</pre><textarea id="pythonCode" spellcheck="false" aria-label="Код Python" placeholder=""></textarea></div>
+          <div id="pythonConsole" class="console"><span>●</span> Готов. Набери код по шагам и нажми «Запустить».</div>
+        </div>
+      </section>
+      <section class="result-column">
+        <div class="result-shell panel">
+          <div class="result-switch"><div><button class="active" data-result="canvas">CANVAS</button><button data-result="terminal">ТЕРМИНАЛ</button></div><span><i></i> LIVE RESULT</span></div>
+          <div id="canvasResult" class="result-pane active"><canvas id="pythonCanvas" width="900" height="560"></canvas><div class="python-empty-preview" id="pythonEmptyPreview"><span>✦</span><b>Здесь появится результат</b><small>Запусти код — и увидишь собственную версию проекта.</small></div></div>
+          <div id="terminalResult" class="result-pane"><pre id="terminalOutput"><span>python@wow:~$</span> Жду твою программу…</pre></div>
+        </div>
+        <div class="code-only-note panel"><span>ТВОЙ ВЫБОР</span><b>Цвет, размер, скорость и данные меняются строками Python.</b><code>Выбери вариант в инструкции и напечатай его в main.py</code></div>
+        <div class="library-strip"><span>ДОСТУПНО:</span><code>math</code><code>random</code><code>secrets</code><code>numpy</code><code>pandas</code><code>scipy</code><code>sympy</code><code>networkx</code><code>statistics</code><code>wow</code></div>
+      </section>
+    </section>
+  </main>
+  <dialog id="guideDialog" class="py-docs practice-help"><div class="dialog-head"><div><span>ФОРМАТ ЗАНЯТИЯ</span><h2>Как проходит практика</h2></div><button id="closeGuide">×</button></div><div class="practice-help-grid"><article><i>1</i><b>Выбери проект</b><p>Слева есть 18 разных практик: визуальные эффекты, игры, полезные программы и анализ данных.</p></article><article><i>2</i><b>Набирай по строкам</b><p>Инструкция показывает точный код и сразу объясняет результат. Готовый код в редактор не вставляется.</p></article><article><i>3</i><b>Сделай свою версию</b><p>В блоке «Выбери и напечатай» возьми один из вариантов цвета, размера, скорости, текста или данных.</p></article><article><i>4</i><b>Запусти</b><p>Нажми «Запустить». Если есть ошибка, Python покажет строку — исправь её и попробуй ещё раз.</p></article></div></dialog>
+  <dialog id="docsDialog" class="py-docs"><div class="dialog-head"><div><span>PYTHON + WOW API</span><h2>Справочник команд</h2></div><button id="closeDocs">×</button></div><div class="docs-grid"><article><b>Графика</b><code>background(a, b)</code><code>particle(x, y, color, size)</code><code>orb(x, y, radius, color)</code><code>ring(x, y, radius, color)</code><code>wave(points, color, width)</code></article><article><b>Миры</b><code>stars(count)</code><code>grid(color, horizon)</code><code>building(x, y, w, h, color)</code><code>sun(x, y, radius, color)</code><code>bloom(strength)</code></article><article><b>Параметры</b><code>color = "red"</code><code>size = 5</code><code>speed = 1.8</code><code>count = 160</code><code>glow = 20</code></article><article><b>Цвета</b><code>"red" · "blue" · "gold"</code><code>"cyan" · "lime" · "violet"</code><code>"#43e6ff" · "#ff5f9e"</code></article><article><b>Python</b><code>for i in range(count):</code><code>if score &gt; 10:</code><code>random.randint(0, 900)</code><code>math.sin(angle)</code></article><article><b>Ошибки</b><code>SyntaxError — проверь знаки</code><code>NameError — проверь имя</code><code>IndentationError — проверь отступ</code></article></div></dialog>
+  <div id="toast" class="toast"></div>
+  <script type="module" src="python-app.js"></script>
+</body>
+</html>
+
