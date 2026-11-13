@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#070912">
   <title>Python WOW Lab — практики на 15 минут</title>
-  <meta name="description" content="18 коротких практик на настоящем Python: точные инструкции, выбор параметров и живой результат.">
+  <meta name="description" content="6 интерактивных практик на настоящем Python: игры, управление и живой результат.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="python-only">
   <div class="noise"></div>
   <header class="py-topbar">
-    <div class="py-brand"><span>Py</span><div><b>PYTHON WOW LAB</b><small>18 практик · по 15 минут</small></div></div>
+    <div class="py-brand"><span>Py</span><div><b>PYTHON WOW LAB</b><small><span id="brandPracticeTotal">6</span> мощных практик · по 15 минут</small></div></div>
     <div class="py-runtime"><i id="runtimeDot"></i><span id="runtimeLabel">Python загрузится при первом запуске</span></div>
     <div class="py-top-actions"><button class="ghost guide-button" id="pythonGuide">? Как заниматься</button><button class="ghost" id="pythonDocs">Справочник</button><button class="ghost" id="exportPython">↓ Скачать .py</button><button class="run-button mint-run" id="runPython">▶ Запустить</button></div>
   </header>
@@ -19,12 +19,12 @@
     <section class="py-intro">
       <div><span class="mode-label mint-text">ПРАКТИКА НА 15 МИНУТ · НАСТОЯЩИЙ PYTHON</span><h1>Выбери проект.<br><em>Собери свою версию.</em></h1></div>
       <p>Каждая практика — готовый мини-проект: набирай точные строки по шагам, запускай результат и выбирай собственные цвета, размеры, скорость, данные и правила.</p>
-      <div class="intro-stats"><b>15<span>строк</span></b><b>18<span>практик</span></b><b>15<span>минут</span></b></div>
+      <div class="intro-stats"><b>15<span>строк</span></b><b id="practiceTotal">6<span>практик</span></b><b>15<span>минут</span></b></div>
     </section>
     <section class="py-workspace">
       <aside class="mission-panel panel">
         <div class="panel-title"><span>01</span> ВЫБЕРИ ПРАКТИКУ</div>
-        <div class="mission-filters" id="missionFilters"><button class="active" data-filter="all">Все</button><button data-filter="visual">Визуал</button><button data-filter="games">Игры</button><button data-filter="useful">Полезное</button><button data-filter="data">Данные / AI</button></div>
+        <div class="mission-filters" id="missionFilters"><button class="active" data-filter="all">Все 6 проектов</button><button data-filter="games">Игры</button></div>
         <div class="difficulty-tabs" id="difficultyFilters"><button class="active" data-level="all">Любой уровень</button><button data-level="easy">Просто</button><button data-level="medium">Средне</button><button data-level="hard">Сложно</button></div>
         <div id="missionList" class="mission-list"></div>
       </aside>
@@ -45,7 +45,7 @@
       <section class="result-column">
         <div class="result-shell panel">
           <div class="result-switch"><div><button class="active" data-result="canvas">CANVAS</button><button data-result="terminal">ТЕРМИНАЛ</button></div><span><i></i> LIVE RESULT</span></div>
-          <div id="canvasResult" class="result-pane active"><canvas id="pythonCanvas" width="900" height="560"></canvas><div class="python-empty-preview" id="pythonEmptyPreview"><span>✦</span><b>Здесь появится результат</b><small>Запусти код — и увидишь собственную версию проекта.</small></div></div>
+          <div id="canvasResult" class="result-pane active"><canvas id="pythonCanvas" width="900" height="560" tabindex="0" aria-label="Игровое поле"></canvas><div class="python-empty-preview" id="pythonEmptyPreview"><span>✦</span><b>Здесь появится результат</b><small>Запусти код — и увидишь собственную версию проекта.</small></div></div>
           <div id="terminalResult" class="result-pane"><pre id="terminalOutput"><span>python@wow:~$</span> Жду твою программу…</pre></div>
         </div>
         <div class="code-only-note panel"><span>ТВОЙ ВЫБОР</span><b>Цвет, размер, скорость и данные меняются строками Python.</b><code>Выбери вариант в инструкции и напечатай его в main.py</code></div>
@@ -53,7 +53,7 @@
       </section>
     </section>
   </main>
-  <dialog id="guideDialog" class="py-docs practice-help"><div class="dialog-head"><div><span>ФОРМАТ ЗАНЯТИЯ</span><h2>Как проходит практика</h2></div><button id="closeGuide">×</button></div><div class="practice-help-grid"><article><i>1</i><b>Выбери проект</b><p>Слева есть 18 разных практик: визуальные эффекты, игры, полезные программы и анализ данных.</p></article><article><i>2</i><b>Набирай по строкам</b><p>Инструкция показывает точный код и сразу объясняет результат. Готовый код в редактор не вставляется.</p></article><article><i>3</i><b>Сделай свою версию</b><p>В блоке «Выбери и напечатай» возьми один из вариантов цвета, размера, скорости, текста или данных.</p></article><article><i>4</i><b>Запусти</b><p>Нажми «Запустить». Если есть ошибка, Python покажет строку — исправь её и попробуй ещё раз.</p></article></div></dialog>
+  <dialog id="guideDialog" class="py-docs practice-help"><div class="dialog-head"><div><span>ФОРМАТ ЗАНЯТИЯ</span><h2>Как проходит практика</h2></div><button id="closeGuide">×</button></div><div class="practice-help-grid"><article><i>1</i><b>Выбери проект</b><p>Слева шесть законченных игровых проектов с настоящим управлением и целью.</p></article><article><i>2</i><b>Открой подсказку</b><p>Нажми «Показать подсказку», когда готов набирать точные строки. Код сам не вставляется.</p></article><article><i>3</i><b>Сделай свою версию</b><p>Меняй ветер, скорость, врагов, физику, размеры мира и цвета прямо в Python.</p></article><article><i>4</i><b>Играй</b><p>Запусти код, кликни по игре и управляй клавишами. R начинает заново.</p></article></div></dialog>
   <dialog id="docsDialog" class="py-docs"><div class="dialog-head"><div><span>PYTHON + WOW API</span><h2>Справочник команд</h2></div><button id="closeDocs">×</button></div><div class="docs-grid"><article><b>Графика</b><code>background(a, b)</code><code>particle(x, y, color, size)</code><code>orb(x, y, radius, color)</code><code>ring(x, y, radius, color)</code><code>wave(points, color, width)</code></article><article><b>Миры</b><code>stars(count)</code><code>grid(color, horizon)</code><code>building(x, y, w, h, color)</code><code>sun(x, y, radius, color)</code><code>bloom(strength)</code></article><article><b>Параметры</b><code>color = "red"</code><code>size = 5</code><code>speed = 1.8</code><code>count = 160</code><code>glow = 20</code></article><article><b>Цвета</b><code>"red" · "blue" · "gold"</code><code>"cyan" · "lime" · "violet"</code><code>"#43e6ff" · "#ff5f9e"</code></article><article><b>Python</b><code>for i in range(count):</code><code>if score &gt; 10:</code><code>random.randint(0, 900)</code><code>math.sin(angle)</code></article><article><b>Ошибки</b><code>SyntaxError — проверь знаки</code><code>NameError — проверь имя</code><code>IndentationError — проверь отступ</code></article></div></dialog>
   <div id="toast" class="toast"></div>
   <script type="module" src="python-app.js"></script>
